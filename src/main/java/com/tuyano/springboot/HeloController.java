@@ -29,11 +29,11 @@ public class HeloController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index(@RequestParam String name,  ModelAndView mav){
+    public ModelAndView index(@RequestParam(required = false) String name,  ModelAndView mav){
 
         //Iterable<MyData> list = myDataRespository.findAll();
         //Iterable<MyData> list = dao.getAll();
-        Iterable<MyData> list = dao.findByName(name);
+        Iterable<MyData> list = myDataRespository.findAllOrderByName();
 
         mav.addObject("list", list);
         mav.addObject("title", "index Page");
