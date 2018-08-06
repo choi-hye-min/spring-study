@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+    <h1 th:text="${title}"></h1>
+    <table border="1">
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>mail</th>
+            <th>age</th>
+            <th>memo</th>
+        </tr>
+        <tr th:each="obj : ${list}">
+            <td th:text="${obj.id}"></td>
+            <td th:text="${obj.name}"></td>
+            <td th:text="${obj.mail}"></td>
+            <td th:text="${obj.age}"></td>
+            <td th:text="${obj.memo}"></td>
+        </tr>
+    </table>
+</body>
+</html>

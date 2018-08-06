@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method="post" th:action="@{/find}">
+        <table border="1">
+            <tr>
+                <td>
+                    <input type="text" name="fstr" size="20" th:value="${value}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <hr>
+    <table border="1">
+        <tr>
+            <th>id</th>
+            <th>이름</th>
+            <th>메일</th>
+            <th>연령</th>
+        </tr>
+        <tr th:each="obj : ${datalist}">
+            <td th:text="${obj.id}"></td>
+            <td th:text="${obj.name}"></td>
+            <td th:text="${obj.mail}"></td>
+            <td th:text="${obj.age}"></td>
+        </tr>
+    </table>
+</body>
+</html>
