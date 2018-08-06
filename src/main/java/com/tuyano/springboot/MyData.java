@@ -7,6 +7,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "mydata")
 @Data
+@NamedQueries(
+        @NamedQuery(
+                name = "findWithName",
+                query = "from MyData where name like :fname"
+        )
+)
 public class MyData {
 
     @Id

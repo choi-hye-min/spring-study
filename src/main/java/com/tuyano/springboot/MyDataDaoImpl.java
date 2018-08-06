@@ -46,11 +46,19 @@ public class MyDataDaoImpl implements MyDataDao<MyData> {
     }
 
     @Override
-    public List<MyData> find(String fstt) {
+    public List<MyData> find(String fstr) {
         List<MyData> list = null;
+        Long fid = 0L;
 
-        Query query = entityManager.createQuery("from MyData where id = :fstr")
-                .setParameter("fstr", Long.parseLong(fstt));
+        try{
+            fid = Long.parseLong(fstr);
+        }catch (NumberFormatException e){
+            //e.printStackTrace();
+        }
+
+        Query query = entityManager
+                .createNamedQuery("findWithName")
+                .setParameter("fname", "%"+fstr+"%");
 
         list = query.getResultList();
 
