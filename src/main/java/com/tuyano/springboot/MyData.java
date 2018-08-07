@@ -3,6 +3,7 @@ package com.tuyano.springboot;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "mydata")
@@ -10,7 +11,7 @@ import javax.persistence.*;
 public class MyData {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 50, nullable = false)
@@ -24,4 +25,8 @@ public class MyData {
 
     @Column(nullable = true)
     private String memo;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @Column(nullable = true)
+    private List<MsgData> msgdatas;
 }
