@@ -1,5 +1,6 @@
 package com.tuyano.springboot;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,5 +29,6 @@ public class MyData {
 
     @OneToMany(cascade = CascadeType.ALL)
     @Column(nullable = true)
+    @JsonIgnore
     private List<MsgData> msgdatas;
 }

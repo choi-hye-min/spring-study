@@ -23,17 +23,21 @@ public class HeloController {
     @Autowired
     MyDataDaoImpl dao;
 
+    @Autowired
+    MyDataService myDataService;
+
     @PostConstruct
     public void init(){
         log.info("----------------------{}", "PostConstruct Init");
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index(@RequestParam String name,  ModelAndView mav){
+    public ModelAndView index(ModelAndView mav){
 
         //Iterable<MyData> list = myDataRespository.findAll();
         //Iterable<MyData> list = dao.getAll();
-        Iterable<MyData> list = dao.findByName(name);
+        //Iterable<MyData> list = dao.findByName(name);
+        Iterable<MyData> list = myDataService.getAll();
 
         mav.addObject("list", list);
         mav.addObject("title", "index Page");
@@ -45,7 +49,7 @@ public class HeloController {
     @RequestMapping(value = "/find", method = RequestMethod.GET)
     public ModelAndView find(ModelAndView mav){
 
-        Iterable<MyData> list = dao.getAll();
+        Iterable<MyData> list = myDataService.getAll();
 
         mav.setViewName("find");
         mav.addObject("value", "");
@@ -65,7 +69,7 @@ public class HeloController {
             mav = new ModelAndView("redirect:/find");
         }else{
             mav.addObject("value", param);
-            List<MyData> list = dao.find(param);
+            List<MyData> list = myDataService.find(param);
             mav.addObject("datalist", list);
         }
 
