@@ -4,11 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @Entity
 @Table(name = "mydata")
 @Data
+@NamedQueries(
+        @NamedQuery(name = "findByAge", query = "from MyData where age > :min and age < :max")
+)
+@XmlRootElement
 public class MyData {
 
     @Id

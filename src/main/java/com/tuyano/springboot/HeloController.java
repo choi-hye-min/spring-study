@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
@@ -39,9 +38,9 @@ public class HeloController {
         //Iterable<MyData> list = dao.findByName(name);
         Iterable<MyData> list = myDataService.getAll();
 
+        mav.setViewName("index");
         mav.addObject("list", list);
         mav.addObject("title", "index Page");
-        mav.setViewName("index");
 
         return mav;
     }
