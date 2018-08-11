@@ -1,6 +1,10 @@
 package com.tuyano.springboot;
 
+import com.tuyano.springboot.repositories.MyDataRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +18,17 @@ public class MyDataService {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    MyDataRepository myDataRepository;
+
+    private static final int PAGET_SIZE = 3;
+
+    public Page<MyData> getMyDataInpage(Integer pageNumber){
+
+        PageRequest pageRequest = new PageRequest(pageNumber-1, PAGET_SIZE);
+        return myDataRepository.findAll(pageRequest);
+    }
 
     public List<MyData> getAll(){
         return entityManager.createQuery("from MyData").getResultList();

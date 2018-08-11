@@ -1,9 +1,11 @@
 package com.tuyano.springboot;
 
-import com.tuyano.springboot.repositories.MyDataRespository;
+import com.tuyano.springboot.repositories.MyDataRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +20,7 @@ import java.util.List;
 public class HeloController {
 
     @Autowired
-    MyDataRespository myDataRespository;
+    MyDataRepository myDataRepository;
 
     @Autowired
     MyDataDaoImpl dao;
@@ -93,4 +95,16 @@ public class HeloController {
     }
 
 
+    @RequestMapping(value = "/page/{num}", method = RequestMethod.GET)
+    public ModelAndView page(@PathVariable("num") Integer num, ModelAndView mav){
+
+        Page<MyData> page = myDataService.getMyDataInpage(num);
+        mav.setViewName("index");
+        mav.addObject("title", "find page");
+        mav.addObject("msg", "mydata의 예제입니다.");
+        mav.addObject("pagenumber", num);
+        mav.addObject("datalist", page);
+
+        return mav;
+    }
 }

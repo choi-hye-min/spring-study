@@ -1,12 +1,12 @@
 package com.tuyano.springboot;
 
-import com.tuyano.springboot.repositories.MyDataRespository;
+import com.tuyano.springboot.repositories.MyDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyDataBean {
 
     @Autowired
-    MyDataRespository repository;
+    MyDataRepository repository;
 
     public String getTableTagById(Long id){
         MyData data = repository.findById(id).get();
